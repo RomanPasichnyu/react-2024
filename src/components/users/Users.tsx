@@ -10,7 +10,6 @@ const Users = () => {
     useEffect(() => {
         getUsers().then((value: IUser[]) => setUsers(value))
     }, []);
-    console.log(users)
     return (
         <div>
             {users.map(user=> <User key={user.id} user={user}/>)}
