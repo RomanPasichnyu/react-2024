@@ -9,10 +9,6 @@ const Product: FC<IProps> = ({product}) => {
     return (
         <div>
             <p>ID:{product.id}</p>
-            <p>Title:{product.title}</p>
-            <p>Price:{product.price}</p>
-            <p>Description: {product.description}</p>
-            <hr/>
         </div>
     );
 };

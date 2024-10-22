@@ -6,7 +6,7 @@ let axiosInstance = axios.create({
 });
 
 export const getProducts = async (page: number) => {
-    const skip = (page - 1) * 50
+    const skip = (page - 1) * 30
 
     let responce = await axiosInstance.get<apiResponce>('/products', {
         params: {

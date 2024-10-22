@@ -8,8 +8,7 @@ const Pagination = () => {
     let [query, setQuery] = useSearchParams({'page': '1'});
     const [apiResponce, setApiResponce] = useState<apiResponce | undefined>();
 
-    let totalPages = apiResponce ? Math.ceil(apiResponce.total/50) : 0;
-    console.log(totalPages)
+    const [flag, setFlag] = useState<boolean>(false)
 
     const prevPage = () => {
         let page = query.get('page');
@@ -22,7 +21,7 @@ const Pagination = () => {
 
     const nextPage = () => {
         let page = query.get('page');
-        if (page && +page < totalPages) {
+        if (page ) {
             let currentPage = +page;
             currentPage++;
             setQuery({page: currentPage.toString()});
@@ -34,13 +33,23 @@ const Pagination = () => {
     useEffect(() => {
         getProducts(+page).then(value => {
             setApiResponce(value);
+            if (value.products.length >0){
+
+            let lastID = value.products[value.products.length-1].id;
+            if (lastID >= value.total){
+                setFlag(true)
+            }else {
+                setFlag(false)
+            }
+
+            }
         });
     }, [page]);
 
     return (
         <div>
             <button onClick={prevPage} disabled={+page === 1}>Prev</button>
-            <button onClick={nextPage} disabled={+page >= totalPages}>Next</button>
+            <button onClick={nextPage} disabled={flag}>Next</button>
         </div>
     );
 };
