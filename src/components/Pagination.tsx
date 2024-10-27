@@ -21,7 +21,7 @@ const Pagination = () => {
 
     const nextPage = () => {
         let page = query.get('page');
-        if (page ) {
+        if (page) {
             let currentPage = +page;
             currentPage++;
             setQuery({page: currentPage.toString()});
@@ -33,14 +33,14 @@ const Pagination = () => {
     useEffect(() => {
         getProducts(+page).then(value => {
             setApiResponce(value);
-            if (value.products.length >0){
+            if (value.products.length > 0) {
 
-            let lastID = value.products[value.products.length-1].id;
-            if (lastID >= value.total){
-                setFlag(true)
-            }else {
-                setFlag(false)
-            }
+                let lastID = value.products[value.products.length - 1].id;
+                if (lastID >= value.total) {
+                    setFlag(true)
+                } else {
+                    setFlag(false)
+                }
 
             }
         });
